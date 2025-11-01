@@ -1,3 +1,5 @@
 src/data/
 src/code/main.py
 venv/
+test_predictions-py.csv
+test_predictions-r.csv
