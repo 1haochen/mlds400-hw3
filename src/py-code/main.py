@@ -81,6 +81,6 @@ output = pd.DataFrame({
     'PassengerId': test_data['PassengerId'],
     'Survived': test_predictions
 })
-output.to_csv("test_predictions.csv", index=False)
-print("Test predictions saved to 'src/data/test_predictions.csv'\n")
+output.to_csv("test_predictions-py.csv", index=False)
+print("Test predictions saved to 'test_predictions-py.csv'\n")
 print("=== SCRIPT COMPLETE ===")

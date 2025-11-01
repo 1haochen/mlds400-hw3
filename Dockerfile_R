@@ -1,0 +1,18 @@
+# Use the official R base image
+FROM r-base:4.3.1
+
+# Set working directory in the container
+WORKDIR /app
+
+# Copy install_packages.R from project root
+COPY install_packages.R /app/
+
+# Copy R code and data folders from project root
+COPY src/r-code/ /app/src/r-code/
+COPY src/data/ /app/src/data/
+
+# Install required R packages
+RUN Rscript /app/install_packages.R
+
+# Set default command to run main.r
+CMD ["Rscript", "src/r-code/main.r"]
