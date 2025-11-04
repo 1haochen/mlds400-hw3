@@ -22,7 +22,7 @@ docker run -v "$(pwd)/:/app" mlds400-hw3-python
 ## R
 
 docker build -f Dockerfile_R -t mlds400-hw3-r .
-docker run --rm mlds400-hw3-r
+docker run mlds400-hw3-r
 docker run -v "$(pwd)/:/app" mlds400-hw3-r
 
 ### R Workflow
