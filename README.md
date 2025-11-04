@@ -1,48 +1,79 @@
 # Titanic Machine Learning Pipeline
 
-## Before you begin
+This project builds a logistic regression model to predict Titanic passenger survival using both Python and R Dockerized workflows.
 
-Please download the Titanic dataset from [Kaggle Titanic Competition Data](https://www.kaggle.com/competitions/titanic/data) and place `train.csv` and `test.csv` under the `src/data` directory.
+---
 
+## Before You Begin
 
-## Download data
+1. Download the dataset from [Kaggle Titanic Competition Data](https://www.kaggle.com/competitions/titanic/data).
+2. Place the following files under the `src/data` directory:
 
-## Python
+   ```
+   src/data/train.csv
+   src/data/test.csv
+   ```
 
-docker build -f Dockerfile_py -t mlds400-hw3-python .
-docker run mlds400-hw3-python                        
-docker run -v "$(pwd)/:/app" mlds400-hw3-python
+---
 
-### Python Workflow
-- The Python workflow uses `src/py-code/main.py` to train a logistic regression model on Titanic data.
-- Input data should be placed in `src/data/train.csv` and `src/data/test.csv`.
-- The output file will be saved as `test_predictions-py.csv` in the project root.
-- To run and mount the output, use the provided docker run command.
+## Python Workflow
 
-## R
+### Build and Run with Docker
 
-docker build -f Dockerfile_R -t mlds400-hw3-r .
-docker run mlds400-hw3-r
-docker run -v "$(pwd)/:/app" mlds400-hw3-r
+```bash
+# Build the Docker image
+docker build -t mlds400-hw3-python -f Dockerfile_py .
 
-### R Workflow
-- The R workflow uses `src/r-code/main.r` to train a logistic regression model on Titanic data.
-- Input data should be placed in `src/data/train.csv` and `src/data/test.csv`.
-- The output file will be saved as `test_predictions-r.csv` in the project root.
-- To run and mount the output, use the provided docker run command.
+# Run the container
+docker run --rm mlds400-hw3-python
+
+# Run and mount the current directory to save outputs locally
+docker run --rm -v "$(pwd):/app" mlds400-hw3-python
+```
+
+### Description
+
+* Script: `src/py-code/main.py`
+* Input: `src/data/train.csv` and `src/data/test.csv`
+* Output: `test_predictions-py.csv` (saved in the project root)
+
+---
+
+## R Workflow
+
+### Build and Run with Docker
+
+```bash
+# Build the Docker image
+docker build -t mlds400-hw3-r -f Dockerfile_R .
+
+# Run the container
+docker run --rm mlds400-hw3-r
+
+# Run and mount the current directory to save outputs locally
+docker run --rm -v "$(pwd):/app" mlds400-hw3-r
+```
+
+### Description
+
+* Script: `src/r-code/main.r`
+* Input: `src/data/train.csv` and `src/data/test.csv`
+* Output: `test_predictions-r.csv` (saved in the project root)
+
+---
 
 ## Output Files
-- After running either workflow, you will find the prediction results in the project root:
-	- `test_predictions-py.csv` (Python)
-	- `test_predictions-r.csv` (R)
+
+After running either workflow, prediction results will appear in the project root:
+
+* `test_predictions-py.csv` — Python output
+* `test_predictions-r.csv` — R output
+
+---
 
 ## Notes
-- Make sure your input data files are present before running the containers.
-- The provided commands will build and run the containers as described above.
 
-
-## R
-docker build -f Dockerfile_py -t mlds400-hw3-r .
-docker run mlds400-hw3-r                    
-docker run -v "$(pwd)/:/app" mlds400-hw3-r
+* Ensure the dataset files exist before building or running the containers.
+* The `--rm` flag removes containers automatically after execution.
+* Mounting (`-v "$(pwd):/app"`) allows saving outputs directly to your local machine.
 
